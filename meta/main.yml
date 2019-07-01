@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: Craig Wilson
+  description: Create and delete users and groups
+  license: Apache v2
+  min_ansible_version: 2.4
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  - name: Debian
+    versions:
+    - stretch
+
+  galaxy_tags:
+  - users
+  - groups
+
+dependencies: []

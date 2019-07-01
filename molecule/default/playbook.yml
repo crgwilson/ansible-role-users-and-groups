@@ -1,0 +1,26 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    users_and_groups_groups:
+      sudo:
+        state: present
+      testaddgroup:
+        state: present
+      testdeletegroup:
+        state: absent
+
+    users_and_groups_users:
+      testbashuser:
+        ssh_key: files/test
+        authorized_key: files/test.pub
+        groups:
+          - sudo
+          - testaddgroup
+      testcshuser:
+        shell: /bin/csh
+
+  roles:
+    - role: ansible-role-users-and-groups

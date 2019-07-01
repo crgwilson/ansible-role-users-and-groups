@@ -1,0 +1,17 @@
+---
+users_and_groups_groups: {}
+# Example:
+#   users_and_groups_groups:
+#     group1:
+#       state: present
+#     group2:
+#       state: absent
+users_and_groups_users: {}
+# Example:
+#   users_and_groups_users:
+#     bob:
+#       shell: /bin/bash
+#       ssh_key: bobs_key.pem
+#       authorized_key: bobs_authorized_key.pem
+#       groups:
+#         - sudo

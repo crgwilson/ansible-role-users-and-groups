@@ -1,0 +1,50 @@
+---
+- name: Create groups
+  group:
+    name: "{{ item.key }}"
+    state: "{{ item.value.state | default('present') }}"
+  with_dict: "{{ users_and_groups_groups }}"
+
+- name: Create user groups
+  group:
+    name: "{{ item.key }}"
+    state: present
+  with_dict: "{{ users_and_groups_users }}"
+
+- name: Create users
+  user:
+    name: "{{ item.key }}"
+    group: "{{ item.key }}"
+    groups: "{{ item.value.groups | default(omit) }}"
+    shell: "{{ item.value.shell | default('/bin/bash') }}"
+    append: true
+    create_home: true
+    remove: true
+    state: "{{ item.value.state | default('present') }}"
+  with_dict: "{{ users_and_groups_users }}"
+
+- name: Create user SSH directory
+  file:
+    path: "/home/{{ item.key }}/.ssh"
+    owner: "{{ item.key }}"
+    group: "{{ item.key }}"
+    mode: 0700
+    state: directory
+  with_dict: "{{ users_and_groups_users }}"
+
+- name: Copy user SSH key
+  copy:
+    content: "{{ lookup('file', item.value.ssh_key) }}"
+    dest: "/home/{{ item.key }}/.ssh/{{ item.value.ssh_key | basename }}"
+    owner: "{{ item.key }}"
+    group: "{{ item.key }}"
+    mode: 0600
+  with_dict: "{{ users_and_groups_users }}"
+  when: "'ssh_key' in item.value"
+
+- name: Create user authorized keys
+  authorized_key:
+    user: "{{ item.key }}"
+    key: "{{ lookup('file', item.value.authorized_key) }}"
+  with_dict: "{{ users_and_groups_users }}"
+  when: "'authorized_key' in item.value"
