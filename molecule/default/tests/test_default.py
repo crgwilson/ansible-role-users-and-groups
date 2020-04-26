@@ -33,7 +33,7 @@ def test_default_users(host, user, groups, shell):
     assert d.is_directory
     assert d.user == user
     assert d.group == user
-    assert d.mode == 0700
+    assert d.mode == 0o700
 
 
 def test_default_ssh_key(host):
@@ -41,7 +41,7 @@ def test_default_ssh_key(host):
     assert f.is_file
     assert f.user == 'testbashuser'
     assert f.group == 'testbashuser'
-    assert f.mode == 0600
+    assert f.mode == 0o600
 
 
 def test_default_authorized_keys(host):
@@ -49,4 +49,4 @@ def test_default_authorized_keys(host):
     assert d.is_file
     assert d.user == 'testbashuser'
     assert d.group == 'testbashuser'
-    assert d.mode == 0600
+    assert d.mode == 0o600

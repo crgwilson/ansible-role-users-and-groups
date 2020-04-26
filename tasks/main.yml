@@ -17,6 +17,7 @@
     group: "{{ item.key }}"
     groups: "{{ item.value.groups | default(omit) }}"
     shell: "{{ item.value.shell | default('/bin/bash') }}"
+    password: "{{ item.value.password | default(omit) }}"
     append: true
     create_home: true
     remove: true
