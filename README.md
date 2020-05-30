@@ -1,5 +1,7 @@
 # Ansible role: Users and Groups
 
+![Molecule Test](https://github.com/crgwilson/ansible-role-users-and-groups/workflows/Molecule%20Test/badge.svg)
+
 Create arbitrary users and groups
 
 * Create user groups
