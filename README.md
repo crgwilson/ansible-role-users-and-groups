@@ -37,6 +37,7 @@ users_and_groups_users:
     shell: /bin/bash
     ssh_key: bobs_key.pem # file path for lookup
     authorized_key: bobs_authorized_key # file path for lookup
+    comment: This is bobs account
     groups:
       - bobs_group
       - sudo
